@@ -1,4 +1,3 @@
-
 // dynamic menu items loaded from Lua config via NUI callback
 let menuItems = [];
 
@@ -33,8 +32,8 @@ window.addEventListener('message', function(event){
     document.querySelectorAll('.cat').forEach(b=>b.classList.remove('active'));
     const comboBtn = document.querySelector('.cat[data-cat="combo"]');
     if (comboBtn) comboBtn.classList.add('active');
-  // load data from config, then render
-  loadMenuData().then(()=> buildGrid('combo'));
+    // load data from config, then render
+    loadMenuData().then(()=> buildGrid('combo'));
   }
 });
 
@@ -44,56 +43,47 @@ document.getElementById('closeX').addEventListener('click', ()=>{
   document.getElementById('outerFrame').setAttribute('aria-hidden','true');
 });
 
- 
 // items now come from loadMenuData() into menuItems
+
+function renderImages(it) {
+  if (Array.isArray(it.imgs) && it.imgs.length >= 2) {
+    return `
+      <div style="display:flex; gap:8px; justify-content:center; align-items:center;">
+        <img src="${it.imgs[0]}" alt="${it.name} 1" style="width:48%; height:auto; max-height:100px; object-fit:contain; border-radius:0; background:transparent;">
+        <img src="${it.imgs[1]}" alt="${it.name} 2" style="width:48%; height:auto; max-height:100px; object-fit:contain; border-radius:0; background:transparent;">
+      </div>`;
+  }
+  return `
+    <div style="display:flex; justify-content:center; align-items:center;">
+      <img src="${it.img}" alt="${it.name}" style="width:auto; max-width:92%; height:auto; max-height:100px; object-fit:contain; border-radius:0; background:transparent;">
+    </div>`;
+}
 
 function buildGrid(filter = 'combo') {
   const grid = document.getElementById('menuGrid');
   grid.innerHTML = '';
-  const source = Array.isArray(menuItems) ? menuItems : [];
-  const items = source.filter(i => i.cat === filter);
+  const items = (Array.isArray(menuItems) ? menuItems : []).filter(i => i.cat === filter);
   items.forEach(it => {
     const d = document.createElement('div');
     d.className = 'item';
     d.setAttribute('role', 'listitem');
-    // Use imgs array when available (combo with 2 images), else fallback to single img
-    if (Array.isArray(it.imgs) && it.imgs.length >= 2) {
-      // Combo: tampilkan dua gambar berdampingan
-      d.innerHTML = `
-        <div style="display:flex; gap:8px; justify-content:center; align-items:center;">
-          <img src="${it.imgs[0]}" alt="${it.name} 1" style="width:48%; height:auto; max-height:100px; object-fit:contain; border-radius:0; background:transparent;">
-          <img src="${it.imgs[1]}" alt="${it.name} 2" style="width:48%; height:auto; max-height:100px; object-fit:contain; border-radius:0; background:transparent;">
-        </div>
-        <div class="iname">${it.name}</div>
-        <div class="iprice">${it.price}</div>
-      `;
-    } else {
-      d.innerHTML = `
-        <div style="display:flex; justify-content:center; align-items:center;">
-          <img src="${it.img}" alt="${it.name}" style="width:auto; max-width:92%; height:auto; max-height:100px; object-fit:contain; border-radius:0; background:transparent;">
-        </div>
-        <div class="iname">${it.name}</div>
-        <div class="iprice">${it.price}</div>
-      `;
-    }
+    d.innerHTML = `
+      ${renderImages(it)}
+      <div class="iname">${it.name}</div>
+      <div class="iprice">${it.price}</div>
+    `;
     grid.appendChild(d);
   });
 }
 
- 
+// --- Improved Best Practice for Category Selection ---
+const allowedCategories = Array.from(document.querySelectorAll('.cat')).map(btn => btn.getAttribute('data-cat'));
 
-// category buttons
 document.querySelectorAll('.cat').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.cat').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    let cat = btn.getAttribute('data-cat');
-    // Map kategori untuk tab
-    if (cat === 'combo') cat = 'combo';
-    else if (cat === 'food') cat = 'food';
-    else if (cat === 'drink') cat = 'drink';
-    else if (cat === 'dessert') cat = 'dessert';
-  else cat = 'combo';
-    buildGrid(cat);
+    const cat = btn.getAttribute('data-cat');
+    buildGrid(allowedCategories.includes(cat) ? cat : 'combo');
   });
 });
