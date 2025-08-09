@@ -1,4 +1,4 @@
-# Menu Card (Standadlone)
+# Menu Card (Standalone)
 
 Menu Card adalah sistem menu digital untuk restoran (FiveM/GTAV) dengan tampilan modern dan performa tinggi, mendukung virtual scroll untuk ribuan item menu.
 
