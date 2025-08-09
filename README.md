@@ -45,7 +45,7 @@ ensure menucard
 - [Clusterize.js](https://clusterize.js.org/) (sudah di-load via CDN, tidak perlu install manual)
 
 ## Credit
-- Dibuat oleh [yon0697](https://github.com/yon0697)
+- Dibuat oleh [Taketora](https://github.com/yon0697)
 - Inspirasi UI: OurCity RP
 
 ## Lisensi
