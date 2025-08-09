@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>OurCity Menu</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="outer-frame" id="outerFrame" aria-hidden="true">
+  <div class="inner-frame">
+    <button class="close-x" id="closeX" aria-label="Close menu">✖</button>
+    <div class="top-row">
+      <div class="logo-wrap"><img src="img/logo.png" alt="OurCity Logo" class="logo"/></div>
+      <div class="title-wrap"><h1 class="menu-title">OURCITY MENU</h1></div>
+      <div class="spacer"></div>
+    </div>
+    <div class="categories">
+  <button class="cat active" data-cat="combo">Paket Combo</button>
+      <button class="cat" data-cat="food">Food</button>
+      <button class="cat" data-cat="drink">Drink</button>
+      <button class="cat" data-cat="dessert">Dessert</button>
+    </div>
+    <div class="content-frame">
+      <div class="grid" id="menuGrid" role="list">
+        <!-- Items inserted by JS or static markup -->
+      </div>
+      <div class="scrollbar" aria-hidden="true"></div>
+    </div>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
