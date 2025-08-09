@@ -1,6 +1,6 @@
-# MenuCard
+# Menu Card (Standadlone)
 
-MenuCard adalah sistem menu digital untuk restoran (FiveM/GTAV) dengan tampilan modern dan performa tinggi, mendukung virtual scroll untuk ribuan item menu.
+Menu Card adalah sistem menu digital untuk restoran (FiveM/GTAV) dengan tampilan modern dan performa tinggi, mendukung virtual scroll untuk ribuan item menu.
 
 ## Fitur
 - **Tampilan modern dan responsif** (HTML, CSS, JS)
