@@ -46,7 +46,6 @@ ensure menucard
 
 ## Credit
 - Dibuat oleh [Taketora](https://github.com/yon0697)
-- Inspirasi UI: OurCity RP
 
 ## Lisensi
 Lihat file [LICENSE](LICENSE).
